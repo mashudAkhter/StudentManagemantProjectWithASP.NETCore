@@ -1,0 +1,37 @@
+﻿@model SchoolManagementCore.Models.ViewModels.StudentListViewModel
+<div>
+    <h4>Student Details</h4>
+    <br />
+    <table class="table table-bordered">
+        <tr>
+            <th>Player ID</th>
+            <td>@Html.DisplayFor(p => p.StudentID)</td>
+        </tr>
+        <tr>
+            <th>Player Name</th>
+            <td>@Html.DisplayFor(p => p.Name)</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>@Html.DisplayFor(p => p.Email)</td>
+        </tr>
+        <tr>
+            <th>Date of Birth</th>
+            <td>@Html.DisplayFor(p => p.DoB)</td>
+        </tr>
+        <tr>
+            <th>Phone</th>
+            <td>@Html.DisplayFor(p => p.Phone)</td>
+        </tr>
+
+        <tr>
+            <th>Salary</th>
+            <td>@Html.DisplayFor(p => p.CourseFee)</td>
+        </tr>
+        <tr>
+            <th>Image</th>
+            <th><img src="@Url.Content(Model.ImageUrl)" width="75" height="80" /></th>
+        </tr>
+
+    </table>
+</div>

@@ -1,0 +1,83 @@
+﻿@model SchoolManagementCore.Models.ViewModels.CreateStudentModel
+@{
+    ViewBag.Title = "Delete";
+    var photoPath = "~/Images/" + (Model.ImageUrl ?? "no.png");
+}
+
+<br />
+<br />
+<h3>Are Sure to delete this record?</h3>
+<div>
+    <table class="table table-bordered table-bordered">
+            <tr>
+                <th>Name</th>
+                <th>Date Of Birth</th>
+                <th>Email</th>
+                <th>Course Name</th>
+                <th>Course Fee</th>
+                <th>Image</th>
+            </tr>
+            <tr>
+                <td>@Html.DisplayFor(p => p.Name);</td>
+                <td>@Html.DisplayNameFor(p => p.DoB)</td>
+                <td>@Html.DisplayFor(p => p.Email);</td>
+                <td>@Html.DisplayFor(p => p.CourseName);</td>
+                <td>@Html.DisplayFor(p => p.CourseFee);</td>
+                <td><img src="@photoPath" width="75" height="80" /></td>
+            </tr>
+        </table>
+    @*<dl>
+        <dt>
+            @Html.DisplayFor(p => p.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(p => p.Name);
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(p => p.DoB)
+        </dt>
+        <dd>
+            @Html.DisplayFor(p => p.DoB);
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(p => p.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(p => p.Email);
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(p => p.Phone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(p => p.Phone);
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(p => p.CourseFee)
+        </dt>
+        <dd>
+            @Html.DisplayFor(p => p.CourseFee);
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(p => p.CourseName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(p => p.CourseName);
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(p => p.ImageUrl);
+        </dt>
+        <dd>
+            <img src="@photoPath" width="75" height="80" />
+        </dd>
+    </dl>*@
+    @using (Html.BeginForm("Delete", "Student", FormMethod.Post, new { @enctype = "multipart/form-data", @id = "SubmitForm" }))
+    {
+        @Html.AntiForgeryToken();
+        @Html.HiddenFor(p => p.StudentID);
+        <div>
+            <input type="submit" value="Delete" class="btn btn-danger" />
+
+        </div>
+    }
+    @Html.ActionLink("Back to List", "Index");
+</div>

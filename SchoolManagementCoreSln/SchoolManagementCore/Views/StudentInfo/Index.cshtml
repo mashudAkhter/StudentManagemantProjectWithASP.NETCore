@@ -1,0 +1,41 @@
+﻿@model IEnumerable<SchoolManagementCore.Models.StudentInfo>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="table-bordered" style="max-width:500px">
+        <h2>Student</h2>
+
+        <p class="btn btn-outline-dark" style="color:lightcoral">
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table" style="max-width:500px;">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.StudentName)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.StudentInfoId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.StudentInfoId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.StudentInfoId })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+    
+</div>
+

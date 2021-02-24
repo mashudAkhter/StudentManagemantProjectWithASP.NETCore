@@ -1,0 +1,106 @@
+﻿@model SchoolManagementCore.Models.ViewModels.VmStudentWiseCourseFee
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="margin-left:50px; margin-right:50px;">
+    <div class="" style="background-color:oldlace">
+        <div class="row" style="padding-left:20px">
+            <div class="col-md-4" style="height: 500px; overflow: auto;">
+                <h4 style="text-align: center; background-color: palevioletred">StudentInfo</h4>
+                <p>
+                    <a href="/Fee/Create" class="btn btn-sm btn-success">Create New</a>
+                </p>
+                <table class="table table-bordered table-striped">
+                    <tr style="background-color:palevioletred; color:white">
+                        <th>
+                            Student Name
+                        </th>
+                        <th>
+                            Total Fee
+                        </th>
+                        <th style="text-align:center">Action..</th>
+                    </tr>
+
+                    @foreach (var item in Model.StudentList)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StudentName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TotalAmount)
+                            </td>
+                            <td>
+                                <a href="/Fee/Index?id=@item.StudentInfoId" class="btn btn-sm btn-primary">Details</a> &nbsp;
+                                <a href="/Fee/EditMultiple?id=@item.StudentInfoId" class="btn btn-sm btn-warning">Edit</a>&nbsp;
+                                <a href="/Fee/DeleteMultiple?id=@item.StudentInfoId" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete this Student with Fee info?')">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div class="col-md-8" style="height: 500px; overflow: auto;">
+                <h4 style="text-align:center; background-color:palevioletred">CourseFee of @Model.StudentName</h4>
+                <p>
+                    <a href="/Fee/Create" class="btn btn-sm btn-success">Create New</a>
+                </p>
+                <table class="table table-striped">
+                    <tr style="background-color:palevioletred; color:white">
+                        <th>
+                            Student
+                        </th>
+                        <th>
+                            Month
+                        </th>
+                        <th>
+                            ExamFee
+                        </th>
+                        <th>
+                            AdmissionDate
+                        </th>
+                        <th>
+                            CourseFee
+                        </th>
+                        <th>
+                            ImagePath
+                        </th>
+                        <th>Action...</th>
+                    </tr>
+
+                    @foreach (var item in Model.CourseFeeList)
+                    {
+                        var photoPath = "/Images/" + (item.ImagePath ?? "photo.jpg");
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StudentName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Month)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CourseFee)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AdmissionDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ExamFee)
+                            </td>
+                            <td>
+                                <img src="@photoPath" style="height:40px; width:40px;" />
+                            </td>
+                            <td>
+                                <a href="/Fee/Edit?id=@item.FeeTblId" class="btn btn-sm btn-warning">Edit</a> &nbsp;
+                                <a href="/Fee/Delete?id=@item.FeeTblId" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete this Information?')">Delete</a>
+                            </td>
+
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

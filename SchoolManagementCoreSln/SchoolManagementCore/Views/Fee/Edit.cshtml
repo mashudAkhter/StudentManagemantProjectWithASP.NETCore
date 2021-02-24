@@ -1,0 +1,57 @@
+﻿@model SchoolManagementCore.Models.ViewModels.VmodelFeeTbl
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var AdmissionDate = Model.AdmissionDate == null ? "" : Convert.ToDateTime(Model.AdmissionDate).ToString("yyyy-MM-dd");
+
+}
+<div class="container">
+    <div style="background-color:ivory">
+        <h2 style="background-color:palevioletred;text-align:center; color:white">Edit Course Info</h2>
+        <div style="padding-right:30px; padding-left:30px">
+            @using (Html.BeginForm("Edit", "Fee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        StudentInfo
+                        <select id="StudentInfoId" name="StudentInfoId" required>
+                            @foreach (var item in Model.StudentList)
+                            {
+                                var Selected = item.StudentInfoId == Model.StudentInfoId ? "selected" : "";
+                                <option value="@item.StudentInfoId">@item.StudentName</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <div id="ProData" class="Table">
+                            <div id="RowData" class="Row">
+                                <input type="hidden" name="FeeTblId" value="@Model.FeeTblId" />
+                                <input type="text" name="Month" placeholder="Month" value="@Model.Month" />
+                                <input type="text" name="CourseFee" placeholder="CourseFee" value="@Model.ExamFee" />
+                                <input type="text" name="Price" placeholder="Price" value="@Model.CourseFee" />
+                                <input type="date" name="AdmissionDate" placeholder="AdmissionDate" value="@AdmissionDate" />
+                                <input type="file" name="imgFile" placeholder="imgFile" />
+                                @*<img src="@Model.ImagePath" style="width:150px" />*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Edit" class="btn btn-success">
+                        </div>
+                    </div>
+                    <div style="text-align:right; padding-right:30px;">
+                        @Html.ActionLink("Back to List", "Index")
+                    </div>
+                </div>
+            }
+        </div>
+
+        
+
+    </div>
+</div>
+

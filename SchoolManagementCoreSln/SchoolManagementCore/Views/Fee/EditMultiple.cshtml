@@ -1,0 +1,82 @@
+﻿@model SchoolManagementCore.Models.ViewModels.VmStudentWiseCourseFee
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div style="background-color:palegoldenrod">
+        <h2 style="text-align:center; background-color:palevioletred">Edit CourseFee</h2>
+        <div style="padding-right:20px;padding-left:20px;">
+            @using (Html.BeginForm("EditMultiple", "Fee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        Student
+                        <select id="StudentInfoId" name="StudentInfoId" required>
+                            @foreach (var item in Model.StudentList)
+                            {
+                                var Selected = item.StudentInfoId == Model.StudentInfoId ? "selected" : "";
+                                <option value="@item.StudentInfoId">@item.StudentName</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <div id="FeeData" class="Table">
+                            <div id="RowData" class="Row">
+                                <input type="hidden" name="FeeTblId" />
+                                <input type="text" name="Month" style="max-width:150px" placeholder="Month" />&nbsp;&nbsp;
+                                <input type="text" name="ExamFee" style="max-width:150px" placeholder="ExamFee" />&nbsp;&nbsp;
+                                <input type="text" name="CourseFee" style="max-width:150px"  placeholder="CourseFee" />&nbsp;&nbsp;
+                                <input type="date" name="AdmissionDate" style="max-width:150px" placeholder="AdmissionDate" />&nbsp;&nbsp;
+                                <input type="file" name="imgFile" style="max-width:250px" placeholder="imgFile" />
+                                <a id="addRow" href="#" class="btn btn-xs btn-success"><i>Add More</i></a><hr />
+                            </div>
+                            @foreach (var item in Model.CourseFeeList)
+                            {
+                                var AdmissionDate = item.AdmissionDate == null ? "" : Convert.ToDateTime(item.AdmissionDate).ToString("yyyy-MM-dd");
+                        <div id="RowData" class="Row">
+                            <input type="hidden" name="FeeTblId" value="@item.FeeTblId" />
+                            <input type="text" name="Month" style="max-width:150px" placeholder="Month" value="@item.Month" />&nbsp;&nbsp;
+                            <input type="text" name="ExamFee" style="max-width:150px" placeholder="ExamFee" value="@item.ExamFee" />&nbsp;&nbsp;
+                            <input type="text" name="CourseFee" style="max-width:150px" placeholder="CourseFee" value="@item.CourseFee" />&nbsp;&nbsp;
+                            <input type="date" name="AdmissionDate" style="max-width:150px" placeholder="AdmissionDate" value="@AdmissionDate" />&nbsp;&nbsp;
+                            <input type="file" name="imgFile" style="max-width:250px" placeholder="imgFile" />
+                            <a id="deleteRow" href="#" class="btn btn-xs btn-danger"><i> Remove </i></a>
+                            @*<img src="@item.ImagePath" style="width:150px" />*@
+                            <hr />
+                        </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-4">
+                            <input type="submit" value="Edit" class="btn btn-info">
+
+                        </div>
+                        <div style="text-align:right;">
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+       
+    </div>
+</div>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script>
+
+    $('#addRow').on('click', function () {
+        $('#FeeData').append('<div id="RowData" class="Row"><input type="text" style="max-width:150px" name="Month" placeholder="Month" /><input type="text" style="max-width:150px" name="ExamFee" placeholder="ExamFee" /><input type="text" style="max-width:150px" name="CourseFee" placeholder="CourseFee" /><input type="date" style="max-width:150px" name="AdmissionDate" placeholder="AdmissionDate" /><input type="file" style="max-width:250px" name="imgFile" placeholder="imgFile" /><a id="deleteRow" href="#" class="btn btn-xs btn-danger"><i>-</i></a><hr /></div>');
+        $('#FeeData').addClass();
+        return false; //prevent form submission
+    });
+    $('#FeeData').on('click', '#deleteRow', function () {
+        $(this).parent().remove();
+        return false; //prevent form submission
+    });
+</script>

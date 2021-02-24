@@ -1,0 +1,31 @@
+﻿@model SchoolManagementCore.Models.StudentInfo
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="table table-bordered" style="max-width:400px">
+        <h2>Details</h2>
+
+        <div>
+          
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.StudentName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.StudentName)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.StudentInfoId }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+</div>
+

@@ -1,0 +1,40 @@
+﻿@model SchoolManagementCore.Models.ViewModels.StudentListViewModel
+@{
+    ViewBag.Title = "Details";
+    var photoPath = "~/Images/" + (Model.ImageUrl ?? "no.png");
+}
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jqueryui/jquery-ui.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+
+<div class="container" style="max-width:500px">
+    <div class="row">
+        <h2>Student Details Information</h2>
+        <table class="table table-bordered table-bordered">
+            <tr>
+                <th>Name</th>
+                <th>Date Of Birth</th>
+                <th>Email</th>
+                <th>Course Name</th>
+                <th>Course Fee</th>
+                <th>Image</th>
+            </tr>
+            <tr>
+                <td>@Html.DisplayFor(p => p.Name);</td>
+                <td>@Html.DisplayNameFor(p => p.DoB)</td>
+                <td>@Html.DisplayFor(p => p.Email);</td>
+                <td>@Html.DisplayFor(p => p.Course.CourseName);</td>
+                <td>@Html.DisplayFor(p => p.CourseFee);</td>
+                <td><img src="@photoPath" width="75" height="80" /></td>
+            </tr>
+        </table>
+
+
+    </div>
+
+</div>
+
+
+

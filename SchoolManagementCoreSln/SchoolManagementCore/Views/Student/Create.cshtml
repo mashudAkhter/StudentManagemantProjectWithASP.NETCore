@@ -1,0 +1,122 @@
+﻿@model SchoolManagementCore.Models.ViewModels.CreateStudentModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link href="~/CustomUi/jquery-ui.css" rel="stylesheet" />
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+<hr />
+<div class="container">
+    <div>
+
+    </div>
+    
+    <div class="row">
+
+        <div class="col-md-5" style="background-color:lightcoral; color:white">
+
+            <h4>Create Student</h4>    <br /><br />
+            <form asp-action="AddOrEdit" asp-controller="Student" enctype="multipart/form-data" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group row">
+                    <label asp-for="Name" class="control-label col-md-2"></label>
+                    <div class="col-md-10">
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+
+                    <label class="control-label col-md-2">DOB</label>
+                    <div class="col-md-10">
+                        <input asp-for="DoB" class="form-control" />
+                        <span asp-validation-for="DoB" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <label asp-for="Email" class="control-label col-md-2"></label>
+                    <div class="col-md-10">
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Phone" class="control-label col-md-2"></label>
+                    <div class="col-md-10">
+                        <input asp-for="Phone" class="form-control" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label asp-for="CourseFee" class="control-label col-md-2"></label>
+                    <div class="col-md-10">
+                        <input asp-for="CourseFee" class="form-control" />
+                        <span asp-validation-for="CourseFee" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <label></label>
+                    <div class="col-md-10">
+                        <img src="~/Images/no.png" height="80" width="75" class="change_edit" />
+                        <input type="file" name="ImageFile" class="form-control changeImage" />
+                        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label style="padding-left:10px">Course</label>
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(p => p.CourseID, new SelectList(Model.courseList, "ID", "CourseName"), "Select One")
+                        @Html.ValidationMessageFor(p => p.CourseID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    @Html.ActionLink("Go to Student List", "Index", "Student")
+                </div>                
+            </form>
+           
+        </div>
+    </div>
+    <div class="row"></div>
+</div>
+
+
+
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jqueryui/jquery-ui.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#DoB").datepicker({
+            changeMonth: true, changeYear: true
+        });
+    })
+    $(function () {
+        $('.changeImage').change(function () {
+            var input = this;
+            if (input.files) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.change_edit').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+
+        })
+    })
+</script>
